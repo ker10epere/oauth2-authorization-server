@@ -1,6 +1,6 @@
 # Spring Oauth2 Authorization Server (Spring Web)
 
-The following are working setup for **Oauth2 Authorization Server**.  
+The following are minimal working setup for **Oauth2 Authorization Server**.  
 Working with `org.springframework.security:spring-security-oauth2-authorization-server:1.2.0-SNAPSHOT`
 
 # Setup
