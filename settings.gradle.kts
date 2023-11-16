@@ -5,4 +5,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = "auth-server-spring-web"
+rootProject.name = "oauth2-authorization-server"
