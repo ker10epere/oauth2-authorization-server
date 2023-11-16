@@ -62,3 +62,12 @@ Working with `org.springframework.security:spring-security-oauth2-authorization-
     "expires_in": 300
    }
    ```
+   
+# Links to Useful Files
+
+1. org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings.builder
+   - available default endpoints
+2. org.springframework.security.oauth2.server.authorization.authentication.CodeVerifierAuthenticator.authenticate
+   - /oauth2/token authentication logic
+3. org.springframework.security.oauth2.server.authorization.authentication.CodeVerifierAuthenticator.codeVerifierValid
+   - code verifier logic
