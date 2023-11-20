@@ -4,23 +4,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.util.Map;
 
 @Configuration
 public class WebSecurityConfig {
     @Bean
-    SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
-        return http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(Customizer.withDefaults())
-                .authorizeHttpRequests(httpRequest-> httpRequest.anyRequest().authenticated())
+                .authorizeHttpRequests(httpRequest ->
+                        httpRequest
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/actuator/**")).permitAll()
+                                .anyRequest().authenticated()
+                )
                 .build();
     }
 
@@ -35,6 +39,8 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // Using this for development testing allows
+        // password in UserDetailsService without {noop} decoder id prefix
         return NoOpPasswordEncoder.getInstance();
     }
 }

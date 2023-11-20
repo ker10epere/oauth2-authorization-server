@@ -14,7 +14,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.UUID;
 
 @Configuration
 public class KeyManager {
@@ -57,7 +56,9 @@ public class KeyManager {
     public RSAKey rsaKey() throws Exception {
         return new RSAKey.Builder(publicKey())
                 .privateKey(privateKey())
-                .keyID(UUID.randomUUID().toString())
+                // Should be dynamic in production
+                // Used this for development so that I can use same RSA on each server reload
+                .keyID("001-Static-KeyId")
                 .build();
     }
 }

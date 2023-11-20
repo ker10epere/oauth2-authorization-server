@@ -17,4 +17,5 @@ public class AuthServerSpringWebApplication {
     public String message() {
         return "HELLO AUTHORIZATION SERVER";
     }
+
 }
